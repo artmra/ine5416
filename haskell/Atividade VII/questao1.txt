@@ -1,0 +1,99 @@
+1.a)
+Classes primitivas são aquelas definidas apenas à partir de tipos primitivos SEM o intermédio de classes. Exemplos de classes
+primitivas são:
+    -> Bounded: é uma classe que estabelece limites máximos e mínimos e que instancia os tipo Int, Char, Bool, (), Ordering e
+    Tuples. A definição formal é:
+        
+        class Bounded a where
+            minBound :: a
+            maxBound :: a
+    -> Eq que trata os métodos de igualdade e desigualdade e instancia todos os tipos, com excessão dos tipo IO e funções.
+    Formalmente definida como:
+        
+        class Ed a where 
+            (==), (/=) :: a -> a -> Bool
+
+            x/= y  = not (x == y)
+            x == y = not (x /= y)
+    -> Functor define os métodos para tipos que podem ser mapeados, por isso instancia tipos [], IO e Maybe. É definida como:
+        
+        class Functor a where
+            fmap :: (a -> b) -> f a -> f b
+
+Classes secundárias são aquelas que se definem à partir de outras classes. Exemplos de classes secundárias são:
+    -> Ord define métodos para tipos de dados totalmente ordenados, instanciando todos os tipos, exceto funções, IO e IoError.
+    Sua definição formal é:
+
+        class (Eq a) => Ord a where
+            compare                 :: a -> a -> Ordering
+            (<), (<=), (>=), (>)    :: a -> a -> Bool
+            max, min                :: a -> a -> a
+
+            compare x y | x == y    = EQ
+                        | x <= y    = LT
+                        | otherwise = GT
+            
+            x <= y   = compare x y /= GT
+            x <  y   = compare x y == LT
+            x >= y   = compare x y /= LT
+            x >  y   = compare x y == GT
+
+            max x y  | x <= y    = y
+                    | otherwise = x
+            min x y  | x <= y    = x
+                    | otherwise = y
+                
+    -> Num define os métodos para operações com números e instancia os tipos Int, Integer, Float e Double. É definida como:
+        
+        class (Eq a, Show a) => Num a where
+            (+), (-), (*)   :: a -> a -> a
+            negate          :: a -> a
+            abs, signum     :: a -> a
+            fromInteger     :: Integer -> a
+
+            x - y            = a + negate y
+            negate x         = 0 - x
+    
+    -> Real, Integral, Fractional, Floating, RealFrac e RealFloat definem os métodos numéricos de operações. Real instancia os
+    tipos Int, Integer, Float e Double, as outras classes instanciam apenas Float e Double. São definidas como:
+
+        class (Num a, Ord a) => Real a where
+            toRacional ::   a -> Rational
+
+        class (Real a, Enum a) => Integral a where
+            quot, rem, div, mod :: a -> a -> a
+            quotRem, divMod     :: a -> a -> (a, a)
+            toInteger           :: a -> Integer
+
+        class (Num a) => Fractional a where
+            (/)                 :: a -> a -> a
+            recip               :: a -> a
+            fromRational        :: Rational -> a
+
+        class (Fractional a) => Floating a where
+            pi                  :: a
+            exp, log, sqrt      :: a -> a
+            (**), logBase       :: a -> a -> a
+            sin, cos, tan       :: a -> a
+            asin, acos, atan    :: a -> a
+            sinh, cosh, tanh    :: a -> a
+            asinh, acosh, atanh :: a -> a
+
+        class (Real a, Fractional a) => RealFrac a where
+            properFraction      :: (Integral b) => a -> (b, a)
+            truncatem round     :: (Integral b) => a -> b
+            ceiling, floor      :: (Integral b) => a -> b
+
+        class (RealFrac a, Floating a) => RealFloat a where
+            floatRadix          :: a -> Integer
+            floatDigits         :: a -> Int
+            floatRange          :: a -> (Int, Int)
+            decodeFloat         :: a -> (Integer, Int)
+            encodeFloat         :: Integer -> Int -> a
+            exponent            :: a -> Int
+            significand         :: a -> a
+            scaleFloat          :: Int -> a -> a
+            IsNaN, isInfinite, isDenormalized, isNegativeZero, isIEEE
+                                :: a -> Bool
+            atan2               :: a -> a -> a
+    
