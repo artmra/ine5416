@@ -96,4 +96,4 @@ Classes secundárias são aquelas que se definem à partir de outras classes. Ex
             IsNaN, isInfinite, isDenormalized, isNegativeZero, isIEEE
                                 :: a -> Bool
             atan2               :: a -> a -> a
-    
+1.b)
