@@ -1,3 +1,4 @@
+-- feito
 main = do
     let estah_aprovado = \a b c -> if (a + b + c)/3 >= 6 then "Aprovado" else "Reprovado"
     print(estah_aprovado 5 5 5)

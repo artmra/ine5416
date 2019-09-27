@@ -1,3 +1,4 @@
+-- feito
 main = do
     let xor = (\x y -> (not x && y) || (x && not y))
     print (xor True True)
