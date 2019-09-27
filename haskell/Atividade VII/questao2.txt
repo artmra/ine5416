@@ -1,5 +1,20 @@
 2)
 Polimorfismo universal:
 
+    -> Parametric:
+    É uma função ou um tipo de dado que pode ser escito genericamente para lidar com diversos
+    valores da mesma maneira. Generics em JAVA, por exemplo.
+
+    -> Structural:
+    Uma função pode operar com objetos que possuam vários tipos;
+
 
 Polimorfismo ad-hoc:
+
+    -> Overloading:
+    Também é conhecido como sobrecarga; você basicamente terá a execução do método de acordo
+    com a quantidade ou tipos de parâmetros da função, então dependerá do que for passado.
+    
+    -> Coercion:
+    Acontece quando um tipo ou um objeto é convertido em outro, implícita ou explícitamente,
+    geralmente em tempo de execução. Pode gerar muitos erros.
