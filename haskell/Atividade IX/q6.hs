@@ -1,5 +1,12 @@
 -- feito
 main = do
-    print ((\a b c -> if a > b && b > c then a else if b > c then b else c) 3 2 1)
-    print ((\a b c -> if a > b && b > c then a else if b > c then b else c) 1 5 3)
-    print ((\a b c -> if a > b && b > c then a else if b > c then b else c) 1 2 10)
+	putStrLn "a:"
+    r <- getLine
+    let a = (read r :: Float)
+    putStrLn "b:"
+    r <- getLine
+    let b = (read r :: Float)
+    putStrLn "c:"
+    r <- getLine
+    let c = (read r :: Float)
+    print ((\a b c -> if a > b && b > c then a else if b > c then b else c) a b c)
