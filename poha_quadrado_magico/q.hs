@@ -8,7 +8,8 @@ magic_matrix = ([2, 7, 6, 9, 5, 1, 4, 3, 8])
 incomplete_magic_matrix :: Matrix
 incomplete_magic_matrix = ([2, 0, 0, 9, 0, 1, 0, 3, 0])
 
--- ____________________________________________________________________________________________________________________________________________
+null_matrix :: Int -> Matrix
+null_matrix n = replicate n 0
 
 -- Método para acessar um elemento em um determinado índice (i, j) da matriz
 
@@ -169,9 +170,42 @@ assert_unicity_of_all_elements (a:b) =
     else
         False
 
-backtracking :: Matrix -> [Int] -> Matrix
-backtracking (a:b) =
+
+Método que verifica se após a inserção de um elemento as outras linhas, colunas e diagonais afetadas por ele obedecem a regra
+
+try_insert_number :: Matrix -> Int -> (Int, Int) -> (Int, Int) -> Bool
+try_insert_number matrix n (i, j) (total_rownum, total_colnum) =
+    if (row_is_complete == True) && (col_is_complete == True) then
+        if i == j then
+            if (main_diagonal_is_complete == True) && (second_diagonal_is_complete == True) then
+                if (sum_row (i, 0) (total_rownum, total_colnum) matrix) == (sum_col (, j) (total_rownum, total_colnum) matrix) && 
+                    (sum_row (i, 0) (total_rownum, total_colnum) matrix) == (sum_main_diagonal 0 (total_rownum, total_colnum) matrix) then
+                        True
+                else
+                    False
+            else
+                if (sum_row (i, 0) (total_rownum, total_colnum) matrix) == (sum_col (, j) (total_rownum, total_colnum) matrix) then
+                        True
+                else
+                    False
+        else
+            if (belong_second_diagonal == True) then
+    else
+        True
+
+        
+backtracking :: Matrix-> [Int] -> Int -> Int -> (Int, Int) -> Matrix
+backtracking [] m _ _ = m
+backtracking (a:b) m n MAX_N =
     if a == 0 then
+        if try_insert_number ((m:n) ++ b) == True then
+            backtracking b m:n 1 MAX_N
+        else
+            if n > MAX_N then
+                null_matrix
+            else
+                backtracking (a:b) m (n + 1) MAX_N
+
         
 
 
