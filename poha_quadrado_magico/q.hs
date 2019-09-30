@@ -46,39 +46,75 @@ setElem new_value (i,j) (rownum, colnum) (total_rownum, total_colnum) (a:b) =
 
 -- Método para somar elementos de um linha i da matriz
 
-sum_row :: (Int, Int) -> (Int, Int) -> Matrix -> [Int]
+sum_row :: (Int, Int) -> (Int, Int) -> Matrix -> Int
 sum_row (i, j) (total_rownum, total_colnum) matrix = 
+    if (j >= total_colnum) then
+        0
+    else
+        getElem (0, 0) (i, j) (total_rownum, total_colnum) matrix + sum_row (i, j + 1) (total_rownum, total_colnum) matrix
+
+-- Método para pegar element de uma linha i
+
+get_row :: (Int, Int) -> (Int, Int) -> Matrix -> [Int]
+get_row (i, j) (total_rownum, total_colnum) matrix = 
     if (j >= total_colnum) then
         []
     else
-        [getElem (0, 0) (i, j) (total_rownum, total_colnum) matrix] ++ sum_row (i, j + 1) (total_rownum, total_colnum) matrix
+        [getElem (0, 0) (i, j) (total_rownum, total_colnum) matrix] ++ get_row (i, j + 1) (total_rownum, total_colnum) matrix
 
 -- Método para somar elementos de uma coluna j da matriz
 
-sum_col :: (Int, Int) -> (Int, Int) -> Matrix -> [Int]
+sum_col :: (Int, Int) -> (Int, Int) -> Matrix -> Int
 sum_col (i, j) (total_rownum, total_colnum) matrix = 
+    if (i >= total_rownum) then
+        0
+    else 
+        getElem (0, 0) (i, j) (total_rownum, total_colnum) matrix + sum_col (i + 1, j) (total_rownum, total_colnum) matrix
+
+-- Método para pegar elementos de uma coluna j
+
+get_col :: (Int, Int) -> (Int, Int) -> Matrix -> [Int]
+get_col (i, j) (total_rownum, total_colnum) matrix = 
     if (i >= total_rownum) then
         []
     else 
-        [getElem (0, 0) (i, j) (total_rownum, total_colnum) matrix] ++ sum_col (i + 1, j) (total_rownum, total_colnum) matrix
+        [getElem (0, 0) (i, j) (total_rownum, total_colnum) matrix] ++ get_col (i + 1, j) (total_rownum, total_colnum) matrix
 
 -- Método para somar elementos da diagonal principal da matriz
 
-sum_main_diagonal :: Int -> (Int, Int) -> Matrix -> [Int]
+sum_main_diagonal :: Int -> (Int, Int) -> Matrix -> Int
 sum_main_diagonal i_j (total_rownum, total_colnum) matrix =
+    if (i_j >= total_rownum) then
+        0
+    else
+        getElem (0, 0) (i_j, i_j) (total_rownum, total_colnum) matrix + sum_main_diagonal (i_j + 1) (total_rownum, total_colnum) matrix
+
+-- Método para retornar os elementos da diagonal principal
+
+get_main_diagonal :: :: Int -> (Int, Int) -> Matrix -> [Int]
+get_main_diagonal i_j (total_rownum, total_colnum) matrix =
     if (i_j >= total_rownum) then
         []
     else
-        [getElem (0, 0) (i_j, i_j) (total_rownum, total_colnum) matrix] ++ sum_main_diagonal (i_j + 1) (total_rownum, total_colnum) matrix
+        [getElem (0, 0) (i_j, i_j) (total_rownum, total_colnum) matrix] ++ get_main_diagonal (i_j + 1) (total_rownum, total_colnum) matrix
 
 -- Método para somar elementos da diagonal secundária da matriz
 
 sum_second_diagonal :: (Int, Int) -> (Int, Int) -> Matrix -> [Int]
 sum_second_diagonal (i, j) (total_rownum, total_colnum) matrix =
     if (i >= total_rownum) then
+        0
+    else
+        getElem (0, 0) (i, j) (total_rownum, total_colnum) matrix + sum_second_diagonal (i + 1, j - 1) (total_rownum, total_colnum) matrix
+
+-- Método para retornar os elementos da diagonal secundária
+
+get_second_diagonal :: (Int, Int) -> (Int, Int) -> Matrix -> [Int]
+get_second_diagonal (i, j) (total_rownum, total_colnum) matrix =
+    if (i >= total_rownum) then
         []
     else
-        [getElem (0, 0) (i, j) (total_rownum, total_colnum) matrix] ++ sum_second_diagonal (i + 1, j - 1) (total_rownum, total_colnum) matrix
+        [getElem (0, 0) (i, j) (total_rownum, total_colnum) matrix] ++ get_second_diagonal (i + 1, j - 1) (total_rownum, total_colnum) matrix
 
 -- ____________________________________________________________________________________________________________________________________________
 
@@ -108,6 +144,11 @@ assert_cols_equality col_sum j (total_rownum, total_colnum) matrix =
 
 -- ____________________________________________________________________________________________________________________________________________
 
+-- Método para verificar se a linha está completa
+row_is_complete :: Int -> Matrix -> Bool
+row_is_complete 
+
+
 -- Método para verificar a unicidade de um elemento
 
 assert_unicity_of_element :: Int -> Matrix -> Bool
@@ -127,6 +168,11 @@ assert_unicity_of_all_elements (a:b) =
         assert_unicity_of_all_elements b
     else
         False
+
+backtracking :: Matrix -> [Int] -> Matrix
+backtracking (a:b) =
+    if a == 0 then
+        
 
 
 main = do
