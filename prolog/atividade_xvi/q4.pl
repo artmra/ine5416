@@ -4,4 +4,4 @@
 % ?- soma([1, 2, 3], X). -> X = 6.
 
 soma([],0).
-soma([H|T], X) :- soma(T, Xac), X is H+Xac.
+soma([H|T], X) :- soma(T, X_), X is (H + X_).

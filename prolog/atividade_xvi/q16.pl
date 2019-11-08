@@ -8,21 +8,15 @@ membro(X,[X|_]) :- !.
 membro(X,[_|T]) :- membro(X,T).
 
 interseccao([], _, []) :- !.
-interseccao([H|T], S2, S3) :- membro(H, S2) ->
-                                    interseccao(T, S2, SS3), S3 = [H|SS3]
-                              ;
-                                    interseccao(T, S2, S3).
+interseccao([H|T], S2, S3) :- membro(H, S2) -> interseccao(T, S2, SS3), S3 = [H|SS3]; interseccao(T, S2, S3).
 
 
 diferenca([], _, []).
-diferenca([H|T], S2, S3) :- membro(H, S2) ->
-                            diferenca(T, S2, S3) 
-                        ;
-                            diferenca(T, S2, SS3), S3 = [H|SS3].
+diferenca([H|T], S2, S3) :- membro(H, S2) -> diferenca(T, S2, S3); diferenca(T, S2, SS3), S3 = [H|SS3].
 
 
 concatena([],L,L).
-concatena([H|T],L2,[H|LContatenada]) :- concatena(T,L2,LContatenada).
+concatena([H|T],L2,[H|L_concat]) :- concatena(T,L2,L_concat).
                                                     
 listaParaConjunto([],[]).
 listaParaConjunto([H|T],[H|L]):- not(membro(H,T)), listaParaConjunto(T,L).

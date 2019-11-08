@@ -6,7 +6,4 @@ membro(X,[X|_]) :- !.
 membro(X,[_|T]) :- membro(X,T).
 
 diferenca([], _, []).
-diferenca([H|T], S2, S3) :- membro(H, S2) ->
-                                diferenca(T, S2, S3) 
-                            ;
-                                diferenca(T, S2, SS3), S3 = [H|SS3].
+diferenca([H|T], S2, S3) :- membro(H, S2) -> diferenca(T, S2, S3); diferenca(T, S2, SS3), S3 = [H|SS3].

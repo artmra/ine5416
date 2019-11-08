@@ -7,7 +7,7 @@ membro(X,[X|_]) :- !.
 membro(X,[_|T]) :- membro(X,T).
 
 concatena([],L,L).
-concatena([H|T],L2,[H|LContatenada]) :- concatena(T,L2,LContatenada).
+concatena([H|T],L2,[H|L_concat]) :- concatena(T,L2,L_concat).
 
 listaParaConjunto([],[]).
 listaParaConjunto([H|T],[H|L]):- not(membro(H,T)), listaParaConjunto(T,L).

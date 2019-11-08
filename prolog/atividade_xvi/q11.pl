@@ -5,4 +5,4 @@
 
 
 primeiros(0,_,[]) :- !.
-primeiros(N, [H|T], L2) :- Nm1 is N-1, primeiros(Nm1, T, L2m), L2 = [H|L2m].
+primeiros(N, [H|T], L2) :- N1 is (N - 1), primeiros(N1, T, L2), L2 = [H|L2].
