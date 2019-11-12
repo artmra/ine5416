@@ -1,4 +1,4 @@
-% ['/home/evaristo-mosby/Desktop/ine5416/prolog/atividade_xix/x_rainhas.pl'].
+% ['/home/evaristo-mosby/Desktop/ine5416/prolog/atividade_xix/s.pl'].
 
 rainha("R").
 rainha(" ").

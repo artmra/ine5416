@@ -75,4 +75,3 @@ solve(S) :-
 
 	hotel(Hotel1), hotel(Hotel2), hotel(Hotel3), hotel(Hotel4),
 	todosDiferentes([Hotel1, Hotel2, Hotel3, Hotel4]).
-
